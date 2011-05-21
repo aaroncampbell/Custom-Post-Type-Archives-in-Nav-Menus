@@ -1,6 +1,6 @@
 === Custom Post Type Archives in Nav Menus ===
 Contributors: aaroncampbell
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal%40xavisys%2ecom&item_name=Twitter%20Widget%20Pro&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2SPVMHXGRUPRU
 Tags: custom post types, cpt, archive, nav menus
 Requires at least: 3.2
 Tested up to: 3.2
