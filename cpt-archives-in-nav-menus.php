@@ -1,16 +1,29 @@
 <?php
 /**
  * Plugin Name: Custom Post Type Archives in Nav Menus
- * Plugin URI: http://xavisys.com/
+ * Plugin URI: https://aarondcampbell.com/wordpress-plugin/custom-post-type-archives-in-nav-menus/
  * Description: Adds an archive checkbox to the nav menu meta box for Custom Post Types that support archives
  * Author: Aaron D. Campbell
- * Author URI: http://xavisys.com/
- * Version: 0.0.1
+ * Author URI: https://aarondcampbell.com/
+ * Version: 0.1.0
  */
 
 class cptArchiveNavMenu {
 	public function __construct() {
-		add_action( 'admin_head-nav-menus.php', array( $this, 'add_filters' ) );
+		add_action( 'init', array( $this, 'init' ) );
+	}
+
+	public function init() {
+		if ( version_compare( floatval( get_bloginfo( 'version' ) ), '4.4', '>=' ) ) {
+
+			 if ( current_user_can( 'activate_plugins' ) ) {
+				  add_action( 'admin_init', array( $this, 'deactivate' ) );
+				  add_action( 'admin_notices', array( $this, 'admin_notice' ) );
+			 }
+
+		} else {
+			 add_action( 'admin_head-nav-menus.php', array( $this, 'add_filters' ) );
+		}
 	}
 
 	public function add_filters() {
@@ -52,6 +65,18 @@ class cptArchiveNavMenu {
 
 		return $posts;
 	}
+
+	public function deactivate() {
+		deactivate_plugins( plugin_basename( __FILE__ ) );
+	}
+
+	public function admin_notice() {
+		 echo '<div class="updated"><p><strong>Custom Post Type Archives in Nav Menus</strong> was added to WordPress core in 4.4; the plug-in has been <strong>deactivated</strong>.</p></div>';
+		 if ( isset( $_GET['activate'] ) ) {
+			  unset( $_GET['activate'] );
+		 }
+	}
+
 }
 
 $cptArchiveNavMenu = new cptArchiveNavMenu();
